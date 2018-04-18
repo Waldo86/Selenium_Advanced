@@ -25,11 +25,16 @@ public class JavaScript {
     @Test
     public void testHighLight(){
         List<WebElement> rows = driver.findElements(By.xpath("//table//tbody//tr"));
+
         for (WebElement row : rows) {
-            JavascriptExecutor js = ((JavascriptExecutor) driver);
-            js.executeScript("arguments[0].style.border='3px red'",row);
-            System.out.println(row.getText());
+            if (row.getText().contains("Florian")){
+                highLight(row);
+            }
         }
+    }
+
+    private Object highLight(WebElement row) {
+        return ((JavascriptExecutor) driver).executeScript("arguments[0].style.border='3px red solid'",row);
     }
 
     @After
